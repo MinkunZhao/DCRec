@@ -1,0 +1,67 @@
+optimizer:
+  name: adam
+  lr: 1.0e-3
+  weight_decay: 0
+
+train:
+  epoch: 3000
+  batch_size: 4096
+  save_model: false
+  loss: pairwise
+  test_step: 3
+  reproducible: true
+  seed: 2025
+  patience: 5
+
+test:
+  metrics: [recall, ndcg]
+  k: [5, 10, 20]
+  batch_size: 1024
+
+data:
+  type: general_cf
+  name: amazon
+
+model:
+  name: ncl
+  keep_rate: 0.8
+  layer_num: 3
+  high_order: 2
+  reg_weight: 1.0e-7
+  proto_weight: 1.0e-4
+  struct_weight: 1.0e-3
+  temperature: 0.1
+  embedding_size: 128
+  epoch_period: 3
+  cluster_num: 50
+
+  # for amazon
+  amazon:
+    layer_num: 3
+    high_order: 2
+    reg_weight: 1.0e-7
+    proto_weight: 1.0e-4
+    struct_weight: 1.0e-3
+    temperature: 0.1
+    epoch_period: 3
+    cluster_num: 50
+  # for yelp
+  yelp:
+    layer_num: 3
+    high_order: 2
+    reg_weight: 1.0e-7
+    proto_weight: 1.0e-4
+    struct_weight: 1.0e-3
+    temperature: 0.1
+    epoch_period: 3
+    cluster_num: 50
+  # for steam
+  steam:
+    layer_num: 3
+    high_order: 2
+    reg_weight: 1.0e-7
+    proto_weight: 1.0e-4
+    struct_weight: 1.0e-3
+    temperature: 0.1
+    epoch_period: 3
+    cluster_num: 50
