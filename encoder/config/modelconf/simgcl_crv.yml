@@ -1,0 +1,85 @@
+optimizer:
+  name: adam
+  lr: 1.0e-3
+  weight_decay: 0
+
+train:
+  epoch: 3000
+  batch_size: 4096
+  save_model: true
+  loss: pairwise
+  test_step: 3
+  reproducible: true
+  seed: 2025
+  patience: 5
+
+test:
+  metrics: [recall, ndcg]
+  k: [5, 10, 20]
+  batch_size: 1024
+
+data:
+  type: general_cf
+  name: amazon
+
+model:
+  name: simgcl_crv
+  # general parameters here
+  keep_rate: 0.8
+  embedding_size: 384
+
+  # dataset-specific parameters here
+  layer_num: 3
+  reg_weight: 1.0e-5
+  cl_weight: 1.0e-1
+  cl_temperature: 0.2
+  kd_weight: 1.0e-2
+  kd_temperature: 0.5
+  contrastive_weight: 0.1
+  contrast_temp: 0.4
+  gat_heads: 1
+  sem_graph_topk: 10
+  eps: 0.9
+  # for amazon
+  amazon:
+    keep_rate: 0.98
+    layer_num: 3
+    contrastive_weight: 8.0e-2
+    contrast_temp: 0.3
+    reg_weight: 1.0e-5
+    cl_weight: 1.0e-1
+    cl_temperature: 0.2
+    kd_weight: 1.0e-2
+    kd_temperature: 0.1
+    gat_heads: 1
+    sem_graph_topk: 10
+    eps: 0.1
+  # for yelp
+  yelp:
+    keep_rate: 0.98
+    layer_num: 3
+    contrastive_weight: 8.0e-2
+    contrast_temp: 0.3
+    reg_weight: 1.0e-5
+    cl_weight: 5.0e-1
+    cl_temperature: 0.2
+    kd_weight: 1.0e-2
+    kd_temperature: 0.1
+    gat_heads: 1
+    sem_graph_topk: 10
+    eps: 0.1
+  # for steam:
+  steam:
+    keep_rate: 0.98
+    layer_num: 4
+    contrastive_weight: 5.0e-3
+    contrast_temp: 0.3
+    reg_weight: 1.0e-5
+    cl_weight: 1.0e-1
+    cl_temperature: 0.1
+    kd_weight: 3.0e-2
+    kd_temperature: 0.1
+    gat_heads: 1
+    sem_graph_topk: 10
+    eps: 0.1
+
